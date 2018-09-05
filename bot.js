@@ -2980,3 +2980,190 @@ client.on("guildMemberAdd", member => {
 
 //MHSTR END NOW THIS IS END
 client.login(process.env.BOT_TOKEN);
+
+client.on('message', message => {
+    if (message.content.startsWith("-hack")) {
+      if (message.author.bot) return
+           message.delete();
+             let args = message.content.split(' ').slice(1);
+                   let virusname = args.join(' ');
+                 if (virusname < 1) {
+                     return message.channel.send("``اكتب اسم الشخص الي تبي يتهكر``");
+                                     }
+                 message.channel.send({embed: new Discord.RichEmbed().setTitle('Loading ' + virusname + "...").setColor(0xFF0000)}).then(function(m) {
+             setTimeout(function() {
+               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓ ] 1%').setColor(0xFF0000)})
+             }, 1000)
+            setTimeout(function() {
+               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓] 25%').setColor(0xFF0000)})
+             }, 2000)
+           setTimeout(function() {     
+               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ] 100%').setColor(0xFF0000)})
+             }, 3000)
+                setTimeout(function() {
+               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Uploaded! Initiating explosion in 1...').setColor(0xFF0000)})
+             }, 4000)
+              setTimeout(function() {
+               m.delete()
+           }, 5000)
+             setTimeout(function() {
+               message.channel.send('تم تهكيرك')
+           }, 6000)
+           });
+         }
+ });
+ 
+   client.on('guildCreate', guild => {
+client.channels.get("481224550655328256").send(`:white_check_mark: **${client.user.tag} دخل سيرفر جديد
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+});
+client.on('guildDelete', guild => {
+  client.channels.get("481224550655328256").send(`:negative_squared_cross_mark: **${client.user.tag} طلع من سيرفر
+Server name: __${guild.name}__
+Server owner: __${guild.owner}__
+Server id: __${guild.id}__ 
+Server Count: __${guild.memberCount}__**`)
+})
+
+client.on('message', message => {
+    if(!message.channel.guild) return;
+if (message.content.startsWith('-ping')) {
+if(!message.channel.guild) return;
+var msg = `${Date.now() - message.createdTimestamp}`
+var api = `${Math.round(client.ping)}`
+if (message.author.bot) return;
+let embed = new Discord.RichEmbed()
+.setAuthor(message.author.username,message.author.avatarURL)
+.setColor('RANDOM')
+.addField('**Time Taken:**',msg + " ms :signal_strength: ")
+.addField('**WebSocket:**',api + " ms :signal_strength: ")
+message.channel.send({embed:embed});
+}
+});
+
+client.on('message', msg => {
+    if (msg.content === 'yousseftube') {
+      msg.reply('**wafin atobi**');
+    }
+  });
+client.on('message', msg => {
+    if (msg.content === 'xboomx') {
+      msg.reply('**mamsalich kan9ad f bot**');
+    }
+  });
+client.on('message', msg => {
+    if (msg.content === 'slm') {
+      msg.reply('**cv khoya**');
+    }
+  });
+client.on('message', msg => {
+    if (msg.content === 'hi') {
+      msg.reply('**hi hani**');
+    }
+  });
+  
+client.on('message' , message => {
+  var prefix = "-";
+  if(message.author.bot) return;
+
+  if(message.content.startsWith(prefix + "tic")) {
+ let array_of_mentions = message.mentions.users.array();
+  let symbols = [':o:', ':heavy_multiplication_x:'] 
+  var grid_message;
+
+  if (array_of_mentions.length == 1 || array_of_mentions.length == 2) {
+    let random1 = Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+    let random2 = Math.abs(random1 - 1); 
+    if (array_of_mentions.length == 1) {
+      random1 = 0;
+      random2 = 0;
+    }
+    let player1_id = array_of_mentions[random1].id;
+    let player2_id = array_of_mentions[random2].id;
+    var turn_id = player1_id;
+    var symbol = symbols[0];
+    let initial_message = `Game match between <@${player1_id}> and <@${player2_id}>!`;
+    if (player1_id == player2_id) {
+      initial_message += '\n_(What a loser, playing this game with yourself :joy:)_'
+    }
+    message.channel.send(`Tic-tac-toe! ${initial_message}`)
+    .then(console.log("Successful tictactoe introduction"))
+    .catch(console.error);
+    message.channel.send(':one::two::three:' + '\n' +
+                         ':four::five::six:' + '\n' +
+                         ':seven::eight::nine:')
+    .then((new_message) => {
+      grid_message = new_message;
+    })
+    .then(console.log("Successful tictactoe game initialization"))
+    .catch(console.error);
+    message.channel.send('Loading... Please wait for the :ok: reaction.')
+    .then(async (new_message) => {
+      await new_message.react('1⃣');
+      await new_message.react('2⃣');
+      await new_message.react('3⃣');
+      await new_message.react('4⃣');
+      await new_message.react('5⃣');
+      await new_message.react('6⃣');
+      await new_message.react('7⃣');
+      await new_message.react('8⃣');
+      await new_message.react('9⃣');
+      await new_message.react('🆗');
+      await new_message.edit(`It\'s <@${turn_id}>\'s turn! Your symbol is ${symbol}`)
+      .then((new_new_message) => {
+        require('./alpha.js')(client, message, new_new_message, player1_id, player2_id, turn_id, symbol, symbols, grid_message);
+      })
+      .then(console.log("Successful tictactoe listener initialization"))
+      .catch(console.error);
+    })
+    .then(console.log("Successful tictactoe react initialization"))
+    .catch(console.error);
+  }
+  else {
+    message.reply(`_Beldum Beldum_ :anger: \`(Use it like this: ${prefix}tictactoe @player1 @player2)\``)
+    .then(console.log("Successful error reply"))
+    .catch(console.error);
+  }
+}
+ });
+
+client.on('message',async msg => {
+     if(msg.channel.type === "dm") return;
+  if(msg.author.bot) return;
+   var everyone = msg.guild.defaultRole;
+  var p = "-";
+  if(msg.content.startsWith(p + "setstats")) {
+  if(!msg.guild.member(msg.author).hasPermissions('MANAGE_CHANNELS')) return msg.reply('❌ **go play minecraft**');
+  if(!msg.guild.member(client.user).hasPermissions(['MANAGE_CHANNELS'])) return msg.reply('❌ **البوت لا يمتلك صلاحية**');
+  var ggg= msg.guild.createChannel('SERVER STATS', 'category').then(kk => {
+           var ccc =msg.guild.createChannel('SERVER STATS', 'voice').then(al => {
+                var aa =msg.guild.createChannel('SERVER STATS', 'voice').then(alp => {
+                   var aaa =msg.guild.createChannel('SERVER STATS', 'voice').then(alph => {
+                       var a =msg.guild.createChannel('SERVER STATS', 'voice').then(yo => {
+       al.setParent(kk);
+       alp.setParent(kk);
+       alph.setParent(kk);
+       yo.setParent(kk);
+     al.overwritePermissions(everyone, { CONNECT: false });
+      alp.overwritePermissions(everyone, { CONNECT: false });
+       alph.overwritePermissions(everyone, { CONNECT: false });
+        yo.overwritePermissions(everyone, { CONNECT: false });
+  setInterval(() => {
+     al.setName('Members: ' + msg.guild.members.filter(m => !(m.user.bot)).size, 'voice');
+      alp.setName('Bots: ' + msg.guild.members.filter(m => m.user.bot).size, 'voice');
+        alph.setName('Text channels: ' + msg.guild.channels.filter(c => c.type == 'text').size, 'voice');
+         yo.setName('Voice channels: ' + (msg.guild.channels.filter(c => c.type == 'voice').size - 3), 'voice');
+ },1000);
+                       })
+                   })
+    
+                })
+           })
+  })
+           
+  }
+ 
+});
