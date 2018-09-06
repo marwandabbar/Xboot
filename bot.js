@@ -3276,6 +3276,3 @@ anti_spam1(bot1, {
   maxDuplicatesWarning: 7,  //alpha codes
   maxDuplicatesBan: 10  //alpha codes
 });
-
-
-
